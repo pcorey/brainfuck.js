@@ -4,14 +4,16 @@ function Block(state) {
 }
 
 Block.prototype.executeCode = function(code) {
-   console.log(code);
    for (var j = 0; j < code.length; j++) {
       var i = code[j];
       switch (i) {
          case '>':
             this.state.p++;
          if (this.state.p >= this.state.d.length) {
-            //expand
+            var len = this.state.d.length;
+            for (var k = 0; k < len; k++) {
+               this.state.d.push(0);
+            }
          }
          break;
          case '<':
@@ -44,8 +46,7 @@ Block.prototype.execute = function(){
    var that = this;
    this.blocks.forEach(function (block) {
       if (block.constructor === Block) {
-         while (!that.state.d[that.state.p]) {
-            console.log(that.state.d, that.state.p);
+         while (that.state.d[that.state.p] !== 0) {
             block.execute();
          }
       }
@@ -88,13 +89,11 @@ function brainLuck(code, input) {
    var state = {
       i: input.split('').reverse(),
       o: [],
-      d: new Array(10),
+      d: [0,0,0,0,0,0,0,0,0,0],
       p: 0
    };
    var blocks = parseBlocks(code, state);
-   console.log(blocks);
    blocks.execute();
-   console.log(state);
    return state.o.join('');
 }
 

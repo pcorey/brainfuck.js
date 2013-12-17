@@ -94,7 +94,7 @@ function parseBlocks(code, state) {
    return root;
 }
 
-function brainLuck(code, input) {
+function brainfuck(code, input) {
    var state = {
       i: input.split('').reverse(),
       o: [],
@@ -106,8 +106,8 @@ function brainLuck(code, input) {
    return state.o.join('');
 }
 
-brainLuck(',>,>,>,<<<.>.>.>.', 'Hello');
+brainfuck(',>,>,>,<<<.>.>.>.', 'Hello');
 
-brainLuck(',[.[-],]', 'Codewars' + String.fromCharCode(0));
+brainfuck(',[.[-],]', 'Codewars' + String.fromCharCode(0));
 
-brainLuck(',+[-.,+]', 'Codewars' + String.fromCharCode(255));
+brainfuck(',+[-.,+]', 'Codewars' + String.fromCharCode(255));

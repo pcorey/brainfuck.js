@@ -24,15 +24,23 @@ Block.prototype.executeCode = function(code) {
          break;
          case '+':
             this.state.d[this.state.p]++;
+            if (this.state.d[this.state.p] > 255) {
+               this.state.d[this.state.p] = 0;
+            }
          break;
          case '-':
             this.state.d[this.state.p]--;
+            if (this.state.d[this.state.p] < 0) {
+               this.state.d[this.state.p] = 255;
+            }
          break;
          case '.':
             this.state.o.push(String.fromCharCode(this.state.d[this.state.p]));
          break;
          case ',':
-            this.state.d[this.state.p] = this.state.i.pop().charCodeAt(0);
+            if (this.state.i.length > 0) {
+               this.state.d[this.state.p] = this.state.i.pop().charCodeAt(0);
+            }
          break;
          case '[':
             throw "loop encountered";
@@ -47,6 +55,7 @@ Block.prototype.execute = function(){
    this.blocks.forEach(function (block) {
       if (block.constructor === Block) {
          while (that.state.d[that.state.p] !== 0) {
+            console.log(that.state.d[that.state.p]);
             block.execute();
          }
       }
@@ -100,3 +109,5 @@ function brainLuck(code, input) {
 brainLuck(',>,>,>,<<<.>.>.>.', 'Hello');
 
 brainLuck(',[.[-],]', 'Codewars' + String.fromCharCode(0));
+
+brainLuck(',+[-.,+]', 'Codewars' + String.fromCharCode(255));

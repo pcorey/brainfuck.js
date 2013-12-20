@@ -107,7 +107,5 @@ function brainfuck(code, input) {
 }
 
 brainfuck(',>,>,>,<<<.>.>.>.', 'Hello');
-
 brainfuck(',[.[-],]', 'Codewars' + String.fromCharCode(0));
-
 brainfuck(',+[-.,+]', 'Codewars' + String.fromCharCode(255));
